@@ -1,5 +1,4 @@
 # WC-2026-M11402226-Hank
-# Wireless Communications Study Notes Template
 ###### tags: `Wireless Communications`
 
 ## :notebook_with_decorative_cover: Personal Information
