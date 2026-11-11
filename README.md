@@ -25,7 +25,7 @@
     -   In this lab, you will compare three 5-second UDP iperf3 tests. You will learn how TDD slot allocation can affect downlink and uplink performance.
   - delivery: [Lab 2](Lab2/Lab2.md).
 
-  - **LAB3: Deploying a 5G Standalone Network Using OpenAirInterface**
+- **LAB3: Deploying a 5G Standalone Network Using OpenAirInterface**
   - Assignment Information: [Lab3](https://hackmd.io/@Z4OmT2gcTXeLxBPXrn-2SQ/HkPUMBw2fx/edit)
   - **Deadline : 12:00, Nov. 16**
   - Goal: 
