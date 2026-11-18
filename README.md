@@ -40,4 +40,4 @@
      -  The network is deployed using OpenAirInterface (OAI) with an F1-split gNB architecture, where the gNB is separated into a Central Unit (CU) and a Distributed Unit (DU).
      -  Students will observe and analyze the communication between different network components, including CU, DU, 5G Core and UEs. The lab also introduces important protocols such as F1AP, NGAP, GTP, RLC, and E2AP.
   - delivery: [Lab 4](Lab4/Lab4.md).
-  
+  - Vote TOP3：https://docs.google.com/forms/d/e/1FAIpQLSeU5-_y7QUD2rFBU-K60wNgAoNFOLayq3fhBavxBv1ez03feQ/viewform
