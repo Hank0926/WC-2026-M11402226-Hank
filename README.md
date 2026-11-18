@@ -32,3 +32,12 @@
     -   The network is deployed using OpenAirInterface (OAI).
   - delivery: [Lab 3](Lab3/Lab3.md).
   - Vote TOP3：https://forms.gle/Mvza68DFBzPcZXfW6
+ 
+- **LAB4: 5G CU/DU Split Deployment and F1-C/F1-U Analysis**
+  - Assignment Information: [Lab4](https://hackmd.io/@Z4OmT2gcTXeLxBPXrn-2SQ/HkJyZOv2fx/edit)
+  - **Deadline : 12:00, Nov. 23**
+  - Goal: 
+     -  The network is deployed using OpenAirInterface (OAI) with an F1-split gNB architecture, where the gNB is separated into a Central Unit (CU) and a Distributed Unit (DU).
+     -  Students will observe and analyze the communication between different network components, including CU, DU, 5G Core and UEs. The lab also introduces important protocols such as F1AP, NGAP, GTP, RLC, and E2AP.
+  - delivery: [Lab 3](Lab4/Lab4.md).
+  
