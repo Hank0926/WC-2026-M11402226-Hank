@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="800" viewBox="0 0 960 800" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#222"/>
+    </marker>
+  </defs>
+  <rect width="960" height="800" fill="#ffffff"/>
+
+  <text x="480" y="34" text-anchor="middle" font-size="20" font-weight="bold" fill="#111">Lab 5 — Initial Access MSC (OAI nrUE ↔ gNB, RFsimulator)</text>
+
+  <!-- Lifeline heads -->
+  <rect x="150" y="56" width="140" height="40" rx="6" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+  <text x="220" y="82" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a3d7c">UE</text>
+  <rect x="670" y="56" width="140" height="40" rx="6" fill="#fdecea" stroke="#c5221f" stroke-width="2"/>
+  <text x="740" y="82" text-anchor="middle" font-size="18" font-weight="bold" fill="#7a1512">gNB (PCI 0)</text>
+
+  <!-- Lifelines -->
+  <line x1="220" y1="96" x2="220" y2="740" stroke="#1a73e8" stroke-width="2" stroke-dasharray="6,5"/>
+  <line x1="740" y1="96" x2="740" y2="740" stroke="#c5221f" stroke-width="2" stroke-dasharray="6,5"/>
+
+  <!-- State: RRC_IDLE -->
+  <rect x="40" y="112" width="160" height="30" rx="15" fill="#fff4e5" stroke="#e37400" stroke-width="2"/>
+  <text x="120" y="132" text-anchor="middle" font-size="14" font-weight="bold" fill="#8a4500">RRC_IDLE</text>
+
+  <!-- Cell search (local UE action) -->
+  <rect x="232" y="112" width="300" height="30" rx="4" fill="#f1f3f4" stroke="#9aa0a6"/>
+  <text x="242" y="132" font-size="13" fill="#333">Cell search: SSB sync OK, PCI 0 (UE log line 63)</text>
+
+  <!-- 1. MIB -->
+  <line x1="740" y1="185" x2="222" y2="185" stroke="#222" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="480" y="177" text-anchor="middle" font-size="15" font-weight="bold">① MIB  (BCCH-BCH / PBCH, e.g. frame 2)</text>
+  <text x="480" y="203" text-anchor="middle" font-size="13" fill="#555">Gives SFN, SCS 30 kHz and CORESET#0 / SearchSpace#0 so the UE can locate SIB1</text>
+
+  <!-- 2. SIB1 -->
+  <line x1="740" y1="250" x2="222" y2="250" stroke="#222" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="480" y="242" text-anchor="middle" font-size="15" font-weight="bold">② SIB1  (BCCH-DL-SCH, SI-RNTI, e.g. frame 1)</text>
+  <text x="480" y="268" text-anchor="middle" font-size="13" fill="#555">Gives PLMN 208/95, TDD pattern and rach-ConfigCommon for Random Access</text>
+
+  <!-- 3. Msg1 -->
+  <line x1="220" y1="330" x2="738" y2="330" stroke="#222" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="480" y="322" text-anchor="middle" font-size="15" font-weight="bold">③ Msg1: PRACH preamble 16  (553.19, frame 489)</text>
+  <text x="480" y="348" text-anchor="middle" font-size="13" fill="#555">Announces a new UE to the gNB and lets the gNB estimate uplink timing</text>
+
+  <!-- 4. Msg2 -->
+  <line x1="740" y1="410" x2="222" y2="410" stroke="#222" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="480" y="402" text-anchor="middle" font-size="15" font-weight="bold">④ Msg2: RAR  (RA-RNTI 0x010f, RAPID 16, TC-RNTI 0xf21e, frame 490)</text>
+  <text x="480" y="428" text-anchor="middle" font-size="13" fill="#555">Answers the preamble with TA, a UL grant for Msg3 and a Temporary C-RNTI</text>
+
+  <!-- 5. Msg3 -->
+  <line x1="220" y1="490" x2="738" y2="490" stroke="#222" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="480" y="482" text-anchor="middle" font-size="15" font-weight="bold">⑤ Msg3: RRCSetupRequest  (UL-CCCH / SRB0, frame 491)</text>
+  <text x="480" y="508" text-anchor="middle" font-size="13" fill="#555">Requests an RRC connection with a random UE identity, cause mo-Signalling</text>
+
+  <!-- 6. Msg4 -->
+  <line x1="740" y1="570" x2="222" y2="570" stroke="#222" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="480" y="562" text-anchor="middle" font-size="15" font-weight="bold">⑥ Msg4: Contention Resolution + RRCSetup  (DL-CCCH, frame 492)</text>
+  <text x="480" y="588" text-anchor="middle" font-size="13" fill="#555">Resolves contention (echoes Msg3 identity) and configures SRB1 + CellGroupConfig</text>
+
+  <!-- State: RRC_CONNECTED -->
+  <rect x="30" y="612" width="180" height="30" rx="15" fill="#e6f4ea" stroke="#188038" stroke-width="2"/>
+  <text x="120" y="632" text-anchor="middle" font-size="14" font-weight="bold" fill="#0d5223">RRC_CONNECTED</text>
+  <text x="232" y="632" font-size="12" fill="#333">RA succeeded (line 87) → State = NR_RRC_CONNECTED (line 90)</text>
+
+  <!-- 7. RRCSetupComplete -->
+  <line x1="220" y1="700" x2="738" y2="700" stroke="#222" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="480" y="692" text-anchor="middle" font-size="15" font-weight="bold">⑦ RRCSetupComplete  (UL-DCCH / SRB1, frame 498)</text>
+  <text x="480" y="718" text-anchor="middle" font-size="13" fill="#555">Confirms RRC setup (transaction ID 1) and carries the NAS Registration Request</text>
+
+  <text x="480" y="760" text-anchor="middle" font-size="12" fill="#777">RNTI 0xf21e (61982) is used from Msg2 onward · NAS Registration / Authentication (Lab 1 scope) follow after this point</text>
+</svg>
